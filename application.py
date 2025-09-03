@@ -3,7 +3,7 @@ import tempfile
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain_groq import ChatGroq
@@ -91,7 +91,7 @@ if uploaded_file is not None:
 
         # Create embeddings and vector DB (FAISS)
         embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-        vectorstore = Chroma.from_documents(split_docs, embeddings)
+        vectorstore = FAISS.from_documents(split_docs, embeddings)
         retriever = vectorstore.as_retriever()
 
         # Save retriever to session
@@ -197,3 +197,4 @@ if uploaded_file is not None:
 
 else:
     st.info("📌 Upload a PDF and enter a question to get started.")
+
