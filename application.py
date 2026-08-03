@@ -8,16 +8,17 @@ from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
 from langchain_groq import ChatGroq
 
+api_key_ = st.secrets["OPENAI_API_KEY"]
 # Initialize Groq LLM
 llm = ChatGroq(
-    api_key = "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",
-    model_name="llama-3.3-70b-versatile",
+    api_key = api_key_,
+    model_name="openai/gpt-oss-120b",
     temperature=0.0)
 # =========================================
 # Streamlit App UI
 # =========================================
 st.set_page_config(page_title="RAG PDF QA", page_icon="📄", layout="centered")
-st.title("📄 RAG-based PDF Question Answering Assistant")
+st.title("📄 DocuMind AI: RAG-Powered PDF Question Answering Assistant")
 
 # Initialize session state variables (to avoid re-running)
 if "summary" not in st.session_state:
